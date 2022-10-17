@@ -3,7 +3,7 @@ import Header  from './components/Header';
 import Home from './components/Home';
 import {Route,Routes} from 'react-router-dom'
 import Edits from './components/Edits';
-
+import Add from './components/Add';
 
 
 function App() {
@@ -27,6 +27,17 @@ function App() {
         }))
   },[])
   
+
+  function addNewContact(newContact){
+    setAddress(prevState=>{
+      return{
+        ...prevState,
+        contacts: [...prevState.contacts, newContact]
+      }
+      
+  })
+  }
+
   function updateContact(e){
     console.log(e.target)
         const {name, value ,className:contactid } = e.target
@@ -72,9 +83,10 @@ function App() {
           <Route path="/edit" element={<h2>edit</h2>}/>
           <Route exact path="/delete" element={<h2>delete</h2>}/>       
           <Route path="/edit/:contactid" element={<Edits contacts={address.contacts} handleChange={(e)=> updateContact(e)}/>} />
+          <Route exact path="/addcontact" element={<Add contacts={address.contacts} handleNewContact={addNewContact} />}/>
         </Routes>
       </div>
-    );
+    )
   
 }
 

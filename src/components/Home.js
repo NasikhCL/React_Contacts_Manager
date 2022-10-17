@@ -22,6 +22,7 @@ export default function List(props){
     return(
         <div className="header-section">
             <h3>List</h3>
+            <Link to="/addcontact"><button>Add Contact</button></Link>
             <div> 
                 {isLoading ? <h2>Loading</h2> : contact}
 

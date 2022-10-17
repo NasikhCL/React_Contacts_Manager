@@ -47,3 +47,10 @@ body {
   height: 900px;
   background-color: yellow;
 }
+
+.add-contact{
+
+  width:70%;
+  height: 500px;
+  background-color: cadetblue;
+}
