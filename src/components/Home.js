@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default function List(){
-    const [address , setAddress] = useState({
-        contacts: [],
-        isLoading: true
+export default function List(props){
+   
+    const{ contacts , isLoading } = props
+    
+    
+    let contact = contacts.map(item => {
+        return(
+            <div>
+                <h2>{item.name}</h2>
+                <h2>{item.email}</h2>
+                <h2>{item.phone}</h2>
+                <Link to={`/edit/${item.id}`} key={item.id} ><span>Edit</span></Link>
+                <hr/>
+            </div>
+        )
+})
 
-    })
-
-    useEffect(()=>{
-            fetch("https://jsonplaceholder.typicode.com/users")
-                .then(res=> res.json())
-                .then(res => setAddress(()=>{
-                    return {
-                        contacts: res,
-                        isLoading: false
-                    }
-                }))
-    },[])
-    let contact = address.contacts.map(item => {
-        return <Link to={`/edit/${item.id}`}><h2 key={item.id}>{item.name}</h2></Link>
-    })
+    
     return(
         <div className="header-section">
             <h3>List</h3>
             <div> 
-                {address.isLoading ? <h2>Loading</h2> : contact}
+                {isLoading ? <h2>Loading</h2> : contact}
 
             </div>
         </div>
