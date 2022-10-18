@@ -12,8 +12,9 @@ export default function List(props){
                 <h2>{item.name}</h2>
                 <h2>{item.email}</h2>
                 <h2>{item.phone}</h2>
-                <Link to={`/edit/${item.id}`} ><span>Edit</span></Link>
-               <h2 onClick={()=>handleDeleteContact(item.id)}>Delete</h2>
+                <Link to={`/edit/${item.id}`} ><button>Edit</button></Link>
+               <button onClick={()=>handleDeleteContact(item.id)}>Delete</button>
+               <hr/>
             </div>
         )
 })

@@ -10,7 +10,7 @@ import Add from './components/Add';
 
 function App() {
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [address , setAddress] = useState({
     contacts: [],
     isLoading: true
