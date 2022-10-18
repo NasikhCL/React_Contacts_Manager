@@ -1,14 +1,16 @@
 import React, { useState,useEffect } from 'react';
+import {Route,Routes} from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom';
+
 import Header  from './components/Header';
 import Home from './components/Home';
-import {Route,Routes} from 'react-router-dom'
 import Edits from './components/Edits';
 import Add from './components/Add';
 
 
 function App() {
 
-
+  const navigate = useNavigate()
   const [address , setAddress] = useState({
     contacts: [],
     isLoading: true
@@ -49,7 +51,7 @@ function App() {
           let upArray = newArray.map(item =>{
             console.log(item.id, contactid)
 
-            if(item.id === parseInt(contactid)){
+            if(item.id === parseInt(contactid,10)){
               console.log(item.id,value)
               console.log([item.name])
 
@@ -70,7 +72,31 @@ function App() {
         })
 }
  
-         
+function deleteContact(id){
+  console.log('dekete ' + id);
+  fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+    method: 'DELETE',
+  })
+  .then(res => res.json())
+  .then(res=> console.log(res)
+    //  setAddress(({
+  //   contacts: res,
+  //   isLoading: true
+  // }))
+  )
+  
+      // navigate('/')
+setAddress(prevState=>{
+ 
+  let newArary = prevState.contacts.filter(item => item.id !== id)
+
+  return{
+    ...prevState,
+    contacts: newArary
+  }
+})
+
+}     
 
 
 
@@ -79,9 +105,7 @@ function App() {
         <Header />
 
         <Routes>
-          <Route path="/" element={<Home contacts={address.contacts} isLoading={address.isLoading}/>}/>
-          <Route path="/edit" element={<h2>edit</h2>}/>
-          <Route exact path="/delete" element={<h2>delete</h2>}/>       
+          <Route path="/" element={<Home contacts={address.contacts} isLoading={address.isLoading} handleDeleteContact={deleteContact}/>}/>     
           <Route path="/edit/:contactid" element={<Edits contacts={address.contacts} handleChange={(e)=> updateContact(e)}/>} />
           <Route exact path="/addcontact" element={<Add contacts={address.contacts} handleNewContact={addNewContact} />}/>
         </Routes>

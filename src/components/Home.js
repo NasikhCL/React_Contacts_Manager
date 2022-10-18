@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 
 export default function List(props){
    
-    const{ contacts , isLoading } = props
+    const{ contacts , isLoading, handleDeleteContact } = props
     
     
     let contact = contacts.map(item => {
         return(
-            <div>
+            <div  key={item.id}>
                 <h2>{item.name}</h2>
                 <h2>{item.email}</h2>
                 <h2>{item.phone}</h2>
-                <Link to={`/edit/${item.id}`} key={item.id} ><span>Edit</span></Link>
-                <hr/>
+                <Link to={`/edit/${item.id}`} ><span>Edit</span></Link>
+               <h2 onClick={()=>handleDeleteContact(item.id)}>Delete</h2>
             </div>
         )
 })
