@@ -28,46 +28,73 @@ export default function Edits(props){
    }
    const submitEdit = (e)=>{
     e.preventDefault();
-    
+    fetch(`https://jsonplaceholder.typicode.com/users/${contactid}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          id: parseInt(contactid,10),
+          name: editName,
+          email: editEmail,
+          phone: editPhone,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => editContact(data));
+
+    // editContact(editName,editEmail,editPhone, contactid)
+     
+}
 
 
 
 
-
-
-
-
-    editContact(editName,editEmail,editPhone, contactid)
-        // setAddress(prevState=>{
-        //     let newArray = prevState.contacts.map(item=> {
-        //         if(contactid === item.id){
-        //             console.log(item)
-        //             return item
-        //         }else{
-        //             return item
-        //         }
-        //     })
-
-
-        // })
-        // navigate('/')
-   }
-//    console.log(contactid)
-// let editContact = contacts.find(item => item.id === parseInt(contactid))
-// useEffect(()=>{
-//     editContact = contacts.find(item => item.id === parseInt(contactid))
-// },[contacts])
+// function  editContact(editName,editEmail,editPhone, contact_id){
+//     let contactid =parseInt(contact_id,10)
    
-//    const currentContact = contacts.find(contact => contact.id === parseInt(id));
-//    console.log(editContact.name)
-  
- 
-// <form onSubmit={addContact}>
-//                 <input placeholder="Enter Your Name" type="text" name="name" value={name} onChange={(e)=> setName(e.target.value)} />
-//                 <input placeholder="Enter Your Email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
-//                 <input placeholder="Enter Your Phone" name="phone" value={phone} onChange={(e)=> setPhone(e.target.value)} />
-//                 <button type="submit">add</button>
-//             </form>
+//     console.log(typeof(contactid))
+//     setAddress(prevState=>(
+//       {...prevState,
+//       isLoading:true
+//       }
+//     ))
+//     fetch(`https://jsonplaceholder.typicode.com/users/${contactid}`, {
+//     method: 'PUT',
+//     body: JSON.stringify({
+//       id: contactid,
+//       name: editName,
+//       email: editEmail,
+//       phone: editPhone,
+//     }),
+//     headers: {
+//       'Content-type': 'application/json; charset=UTF-8',
+//     },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => 
+//       setAddress(prevState=>{
+//         const newArary = prevState.contacts.map(item =>( (item.id === contactid) ? data : item ))
+//         return{
+//           contacts:newArary,
+//           isLoading: false
+//         }
+//       })
+//       );
+
+//       navigate('/')
+   
+   
+//   }
+
+
+
+
+
+
+
+
+
 
     return (
         <div className="edits">
@@ -87,7 +114,7 @@ export default function Edits(props){
                     <label htmlFor="phone">Phone</label>
                     <input type="text" className="form-control" onChange={handleChange} value={editPhone} name="phone" id="phone" placeholder="Enter Phone" />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button> 
                 {/* <button type="submit" class="btn btn-primary">cancel</button> */}
             </form>
         </div>

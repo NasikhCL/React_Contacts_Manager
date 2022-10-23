@@ -72,52 +72,18 @@ function App() {
 //           }
 //         })
 // }
- function  editContact(editName,editEmail,editPhone, contact_id){
-  let contactid =parseInt(contact_id,10)
- 
-  console.log(typeof(contactid))
-  setAddress(prevState=>(
-    {...prevState,
-    isLoading:true
-    }
-  ))
-  fetch(`https://jsonplaceholder.typicode.com/users/${contactid}`, {
-  method: 'PUT',
-  body: JSON.stringify({
-    id: contactid,
-    name: editName,
-    email: editEmail,
-    phone: editPhone,
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
-  .then((response) => response.json())
-  .then((data) => 
+ function  editContact(data){
+
     setAddress(prevState=>{
-      const newArary = prevState.contacts.map(item =>( (item.id === contactid) ? data : item ))
+      const newArary = prevState.contacts.map(item =>( (item.id === data.id) ? data : item ))
       return{
         contacts:newArary,
         isLoading: false
       }
     })
-    );
+
     // console.log()
     navigate('/')
-  
-  
-  // console.log('editcontact function loaded')
-  //  setAddress(prevState=>{
-  //   return{
-  //     ...prevState,
-  //   [prevState.contacts]: [{editName, editEmail , editPhone}]
-  //   }
-  // })
-  // console.log(editName)
-  // useEffect(()=>{
-    // navigate('/')
-  // },[address])
  
 }
  
