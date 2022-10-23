@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
-import {Route,Routes} from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom';
+import {Route,Routes, useNavigate } from 'react-router-dom'
+
 
 import Header  from './components/Header';
 import Home from './components/Home';
@@ -10,7 +10,7 @@ import Add from './components/Add';
 
 function App() {
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const [address , setAddress] = useState({
     contacts: [],
     isLoading: true
@@ -28,7 +28,7 @@ function App() {
             }
         }))
   },[])
-  
+
 
   function addNewContact(newContact){
     setAddress(prevState=>{
@@ -39,37 +39,86 @@ function App() {
       
   })
   }
+  
 
-  function updateContact(e){
-    console.log(e.target)
-        const {name, value ,className:contactid } = e.target
+//   function updateContact(e){
+//     console.log(e.target)
+//         const {name, value ,className:contactid } = e.target
     
-        setAddress(prevState=>{
-          console.log(prevState.contacts)
-          let newArray= prevState.contacts
+//         setAddress(prevState=>{
+//           console.log(prevState.contacts)
+//           let newArray= prevState.contacts
 
-          let upArray = newArray.map(item =>{
-            console.log(item.id, contactid)
+//           let upArray = newArray.map(item =>{
+//             console.log(item.id, contactid)
 
-            if(item.id === parseInt(contactid,10)){
-              console.log(item.id,value)
-              console.log([item.name])
+//             if(item.id === parseInt(contactid,10)){
+//               console.log(item.id,value)
+//               console.log([item.name])
 
-              return {
-                ...item,
-                [name] : value
-              }
-            }else{
-              console.log('erturn')
-                return item
-              }
-          })
-          console.log(upArray)
-          return {
-            ...prevState,
-            contacts: upArray
-          }
-        })
+//               return {
+//                 ...item,
+//                 [name] : value
+//               }
+//             }else{
+//               console.log('erturn')
+//                 return item
+//               }
+//           })
+//           console.log(upArray)
+//           return {
+//             ...prevState,
+//             contacts: upArray
+//           }
+//         })
+// }
+ function  editContact(editName,editEmail,editPhone, contact_id){
+  let contactid =parseInt(contact_id,10)
+ 
+  console.log(typeof(contactid))
+  setAddress(prevState=>(
+    {...prevState,
+    isLoading:true
+    }
+  ))
+  fetch(`https://jsonplaceholder.typicode.com/users/${contactid}`, {
+  method: 'PUT',
+  body: JSON.stringify({
+    id: contactid,
+    name: editName,
+    email: editEmail,
+    phone: editPhone,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((data) => 
+    setAddress(prevState=>{
+      const newArary = prevState.contacts.map(item =>( (item.id === contactid) ? data : item ))
+      return{
+        contacts:newArary,
+        isLoading: false
+      }
+    })
+    );
+    // console.log()
+    navigate('/')
+  
+  
+  // console.log('editcontact function loaded')
+  //  setAddress(prevState=>{
+  //   return{
+  //     ...prevState,
+  //   [prevState.contacts]: [{editName, editEmail , editPhone}]
+  //   }
+  // })
+  // console.log(editName)
+  // useEffect(()=>{
+    // navigate('/')
+  // },[address])
+ 
 }
  
 function deleteContact(id){
@@ -106,7 +155,7 @@ setAddress(prevState=>{
 
         <Routes>
           <Route path="/" element={<Home contacts={address.contacts} isLoading={address.isLoading} handleDeleteContact={deleteContact}/>}/>     
-          <Route path="/edit/:contactid" element={<Edits contacts={address.contacts} handleChange={(e)=> updateContact(e)}/>} />
+          <Route path="/edit/:contactid" element={<Edits contacts={address.contacts} editContact={editContact}/>} />
           <Route exact path="/addcontact" element={<Add contacts={address.contacts} handleNewContact={addNewContact} />}/>
         </Routes>
       </div>

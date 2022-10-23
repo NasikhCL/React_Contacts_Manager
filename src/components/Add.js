@@ -38,8 +38,8 @@ navigate('/')
 
             <form onSubmit={addContact}>
                 <input placeholder="Enter Your Name" type="text" name="name" value={name} onChange={(e)=> setName(e.target.value)} />
-                <input placeholder="Enter Your Email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
-                <input placeholder="Enter Your Phone" name="phone" value={phone} onChange={(e)=> setPhone(e.target.value)} />
+                <input placeholder="Enter Your Email" type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
+                <input placeholder="Enter Your Phone" type="phone" name="phone" value={phone} onChange={(e)=> setPhone(e.target.value)} />
                 <button type="submit">add</button>
             </form>
 
