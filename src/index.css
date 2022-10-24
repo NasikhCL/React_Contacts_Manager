@@ -29,11 +29,15 @@ body {
 
 .home{
   margin-top: 10px;
+  /* width: 300px; */
 }
+/* .table{
+  width: 300px;
+} */
 .add-contact-btn{
   border: 1px solid grey;
   background-color: transparent;
-  width: 120px;
+  width: 150px;
   height: 40px;
   margin-bottom: 20px;
   margin-left: 10px;
@@ -55,15 +59,7 @@ body {
   color:grey;
 }
 
-.edits{
 
-  margin: auto;
- 
-  /* align-items: center; */
-  background-color: blueviolet;
-  width: 700px;
- 
-}
 
 .blue{
   width:700px;
@@ -71,9 +67,31 @@ body {
   background-color: yellow;
 }
 
-.add-contact{
+/* .add-contact{
+  color:grey;
+  margin: auto;
+  margin-top: 25px;
+  background-color: rgb(212, 209, 209);
+  max-width:500px;
+  padding: 10px;
+  border-radius:10px;
 
-  width:70%;
-  height: 500px;
-  background-color: cadetblue;
+} */
+/* .add-contact .btn{
+  margin: 10px 10px 10px 0px;
+} */
+.edits, .add-contact{
+  color:grey;
+  margin: auto;
+  margin-top: 25px;
+  background-color: rgb(212, 209, 209);
+  max-width:500px;
+  padding: 10px;
+  border-radius:10px;
+}
+.edits .btn, .add-contact .btn{
+  margin: 10px 10px 10px 0px;
+}
+input{
+  max-width: 500px;
 }

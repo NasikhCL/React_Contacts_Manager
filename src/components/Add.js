@@ -1,10 +1,10 @@
 import React,{useState} from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function Add(props){
 
-const navigate = useNavigate()
+// const navigate = useNavigate()
 const {contacts, handleNewContact} =props    
 
 const[name, setName]=useState('')
@@ -30,19 +30,32 @@ function addContact(){
   .then((response) => response.json())
   .then((json) => handleNewContact(json));
 
-navigate('/')
+// navigate('/')
 
 }
     return(
         <div className="add-contact">
-
+            <h2>Add New Contact</h2>
             <form onSubmit={addContact}>
-                <input placeholder="Enter Your Name" type="text" name="name" value={name} onChange={(e)=> setName(e.target.value)} />
-                <input placeholder="Enter Your Email" type="email" name="email" value={email} onChange={(e)=> setEmail(e.target.value)} />
-                <input placeholder="Enter Your Phone" type="phone" name="phone" value={phone} onChange={(e)=> setPhone(e.target.value)} />
-                <button type="submit">add</button>
+                <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input type="text" className="form-control" onChange={(e)=> setName(e.target.value)}  value={name} name="name" id="name" placeholder="Enter Name" required/>
+                
+                </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" className="form-control" onChange={(e)=> setEmail(e.target.value)}  value={email} id="email" name="email" placeholder="Enter email" required />
+                
+                </div>
+                <div className="form-group">
+                    <label htmlFor="phone">Phone</label>
+                    <input type="phone" className="form-control" onChange={(e)=> setPhone(e.target.value)}  value={phone} name="phone" id="phone" placeholder="Enter Phone" required/>
+                </div>
+                <button type="submit" className="btn btn-dark">Confirm</button> 
+                <Link to="/"><button type="submit" class="btn btn-danger">cancel</button></Link>
             </form>
 
         </div>
     )
 }
+

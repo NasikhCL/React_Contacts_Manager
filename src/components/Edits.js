@@ -98,7 +98,7 @@ export default function Edits(props){
 
     return (
         <div className="edits">
-            <h2>Edits page{contactid}</h2>
+            <h2>Edit Contact</h2>
             <form onSubmit={submitEdit}>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -114,40 +114,11 @@ export default function Edits(props){
                     <label htmlFor="phone">Phone</label>
                     <input type="text" className="form-control" onChange={handleChange} value={editPhone} name="phone" id="phone" placeholder="Enter Phone" />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button> 
-                {/* <button type="submit" class="btn btn-primary">cancel</button> */}
+                <button type="submit" className="btn btn-dark">Confirm</button> 
+                <Link to="/"><button type="submit" class="btn btn-danger">cancel</button></Link>
             </form>
         </div>
     )
 }
 
-
-
-
-// <form onSubmit={submitEdit}>
-//                 <input
-                    
-//                     type="text"
-//                     onChange={handleChange}
-//                     name="name"
-//                     value={editName}
-//                 />
-//                 <input
-                    
-//                     type="text"
-//                     onChange={handleChange}
-//                     name="email"
-//                     value={editEmail}
-//                 />
-//                 <input
-                    
-//                     type="text"
-//                     onChange={handleChange}
-//                     name="phone"
-//                     value={editPhone}
-//                 />
-                
-//                 <button type="submit">submit</button>
-               
-//            </form>
             

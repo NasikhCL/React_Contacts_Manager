@@ -7,7 +7,7 @@ export default function List(props){
    
     const{ contacts , isLoading, handleDeleteContact } = props
     let contact
-// useEffect(()=>{
+
     contact = contacts.map(item => {
         return(
             <tr  key={item.id}>
@@ -25,7 +25,7 @@ export default function List(props){
         )
     })
 
-    // },[])
+  
     
     return(
         <div className="home">
